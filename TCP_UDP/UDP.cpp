@@ -40,7 +40,7 @@ INT32 UDP::send(const Address& inAddress, const char* inContent, const size_t& i
 		return -1;
 	}
 
-	INT32 sentBytes = sendto(this->m_socketID, inContent, inSize, 0, (const sockaddr*)&inAddress, sizeof(struct sockaddr));
+	INT32 sentBytes = ::sendto(this->m_socketID, inContent, inSize, 0, (const sockaddr*)&inAddress, sizeof(struct sockaddr));
 	if (sentBytes == -1)
 	{
 		printf("[send] with %s:%u cannot finish!\n", inAddress.getIP().c_str(), inAddress.getPort());
@@ -60,7 +60,7 @@ INT32 UDP::send(const std::string& inIP, const USHORT& inPort, const char* inCon
     }
 
     Address address(inIP, inPort);
-    INT32 sentBytes = sendto(this->m_socketID, inContent, inSize, 0, (const sockaddr*)&address, sizeof(struct sockaddr));
+    INT32 sentBytes = ::sendto(this->m_socketID, inContent, inSize, 0, (const sockaddr*)&address, sizeof(struct sockaddr));
     if (sentBytes == -1)
     {
         printf("[send] with %s:%u cannot finish!\n", inIP.c_str(), inPort);
@@ -82,7 +82,7 @@ INT32 UDP::receive(char* outContent, const size_t& inSize, IOType inIOType)
         this->setIOType(inIOType);
 
     INT32 size = sizeof(struct sockaddr);
-    INT32 receivedBytes = recvfrom(this->m_socketID, outContent, inSize, 0, NULL, NULL);
+    INT32 receivedBytes = ::recvfrom(this->m_socketID, outContent, inSize, 0, NULL, NULL);
     return receivedBytes;
 }
 
@@ -100,7 +100,7 @@ INT32 UDP::receive(char* outContent, const size_t& inSize, Address& outAddress, 
         this->setIOType(inIOType);
 
     INT32 size = sizeof(struct sockaddr);
-    INT32 receivedBytes = recvfrom(this->m_socketID, outContent, inSize, 0, (struct sockaddr*)&outAddress, &size);
+    INT32 receivedBytes = ::recvfrom(this->m_socketID, outContent, inSize, 0, (struct sockaddr*)&outAddress, &size);
     return receivedBytes;
 }
 
@@ -119,7 +119,7 @@ INT32 UDP::receive(char* outContent, const size_t& inSize, std::string& outIP, U
 
     Address address;
     INT32 size = sizeof(struct sockaddr);
-    INT32 receivedBytes = recvfrom(this->m_socketID, outContent, inSize, 0, (struct sockaddr*)&address, &size);
+    INT32 receivedBytes = ::recvfrom(this->m_socketID, outContent, inSize, 0, (struct sockaddr*)&address, &size);
     outIP = address.getIP();
     outPort = address.getPort();
     return receivedBytes;

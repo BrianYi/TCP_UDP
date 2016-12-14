@@ -29,7 +29,7 @@ void TCP::listen_on_port( const USHORT& inPort )
 		CommonSocket::bind_to_port(inPort);
 	}
 
-	if (listen(this->m_socketID, MAX_CONNECTION_NUM) != 0)
+	if (::listen(this->m_socketID, MAX_CONNECTION_NUM) != 0)
 	{
 		printf("[TCP] listen_on_port error!\n");
 		return;
@@ -123,7 +123,7 @@ INT32 TCP::receive( char* outContent, const size_t& inSize, IOType inIOType)
     if (this->m_ioType != inIOType)
         this->setIOType(inIOType);
 
-	INT32 receivedBytes = recv(this->m_socketID, outContent, inSize, 0);
+	INT32 receivedBytes = ::recv(this->m_socketID, outContent, inSize, 0);
 	return receivedBytes;
 }
 
