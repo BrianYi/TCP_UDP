@@ -7,6 +7,7 @@
 *********************************************************************/
 #pragma once
 #include "CommonSocket.h"
+
 class TCP :
 	public CommonSocket
 {

@@ -41,7 +41,7 @@ void Address::setIP(const std::string& inIP)
     }
     else
     {
-        this->sin_addr.S_un.S_addr = address;
+        this->sin_addr.s_addr = address;
     }
 }
 
