@@ -7,7 +7,7 @@
 *********************************************************************/
 #pragma once
 
-#include <winsock.h>
+#include <winsock2.h>
 #include <intsafe.h>
 #include <stdio.h>
 
