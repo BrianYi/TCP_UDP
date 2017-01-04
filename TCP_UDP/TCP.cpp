@@ -1,11 +1,11 @@
 #include "TCP.h"
 
-TCP::TCP():CommonSocket(SOCK_STREAM)
+TCP::TCP():CommonSocket(SOCK_STREAM, IPPROTO_TCP)
 {
 
 }
 
-TCP::TCP(const TCP& inTCP) : CommonSocket(SOCK_STREAM)
+TCP::TCP(const TCP& inTCP) : CommonSocket(SOCK_STREAM, IPPROTO_TCP)
 {
     *this = inTCP;
 }

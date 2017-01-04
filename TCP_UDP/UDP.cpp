@@ -1,6 +1,6 @@
 #include "UDP.h"
 
-UDP::UDP():CommonSocket(SOCK_DGRAM)
+UDP::UDP():CommonSocket(SOCK_DGRAM, IPPROTO_UDP)
 {
 }
 
@@ -9,9 +9,9 @@ UDP::UDP():CommonSocket(SOCK_DGRAM)
 // {
 // }
 
-UDP::UDP(const UDP& inTCP) :CommonSocket(SOCK_DGRAM)
+UDP::UDP(const UDP& inUDP) :CommonSocket(SOCK_DGRAM, IPPROTO_UDP)
 {
-    *this = inTCP;
+    *this = inUDP;
 }
 
 UDP::~UDP()

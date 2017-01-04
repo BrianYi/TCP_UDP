@@ -12,7 +12,7 @@ class UDP :
 {
 public:
     UDP();
-    UDP(const UDP& inTCP);
+    UDP(const UDP& inUDP);
     ~UDP();
 	void listen_on_port(const USHORT& inPort);
 	INT32 send(const Address& inAddress, const char* inContent, const size_t& inSize);

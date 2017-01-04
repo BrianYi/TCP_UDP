@@ -12,21 +12,27 @@
 class CommonSocket
 {
 public:
-    CommonSocket();
-    CommonSocket(INT32 inSocketType, IOType inIOType = Blocking);
+    CommonSocket(INT32 inSocketType, INT32 inProtocol, IOType inIOType = Blocking);
     ~CommonSocket();
+	void setIOType(IOType inIOType);
+    void reuse_addr();
+    void no_delay();
+    void keep_alive();
+    void set_socket_sndbuf_size(UINT32 inNewSize);
+    void set_socket_rcvbuf_size(UINT32 inNewSize);
+protected:
     void open();
     void close();
-	void setIOType(IOType inIOType);
-protected:
     void bind_to_port(const USHORT& inPort);
 protected:
     SOCKET m_socketID;
     INT32 m_socketType;
+    INT32 m_protocol;
     BOOL m_opened;
     BOOL m_binded;
     IOType m_ioType;
 private:
+    CommonSocket();
     static UINT32 s_num_sockets;
 };
 

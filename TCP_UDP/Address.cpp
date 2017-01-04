@@ -20,7 +20,7 @@ Address::Address(const std::string& inIP, const USHORT& inPort)
 
 Address::Address(struct sockaddr_in inSockAddr)
 {
-    _address(inet_ntoa(inSockAddr.sin_addr), inSockAddr.sin_port);
+    _address(::inet_ntoa(inSockAddr.sin_addr), inSockAddr.sin_port);
 }
 
 Address::~Address()
@@ -29,12 +29,12 @@ Address::~Address()
 
 std::string Address::getIP() const
 {
-    return inet_ntoa(this->sin_addr);
+    return ::inet_ntoa(this->sin_addr);
 }
 
 void Address::setIP(const std::string& inIP)
 {
-    ULONG address = inet_addr(inIP.c_str());
+    ULONG address = ::inet_addr(inIP.c_str());
     if (address == INADDR_NONE)
     {
         printf("Invalid ip address!\n");
